@@ -72,3 +72,7 @@ class LogisticRegression:
         """
         probabilities = self.predict_proba(X)
         return [1 if p > threshold else 0 for p in probabilities]
+
+    def get_params(self):
+        return {'w', self.w, 'b', self.b}
+    
