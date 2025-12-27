@@ -20,3 +20,10 @@ class LogisticRegression:
         σ(z) = 1 / (1 + e^(-z))
         """
         return 1 / (1 + math.exp(-z))
+
+    def predict_proba(self, X: List[float]) -> List[float]:
+        """
+        Возвращает вероятность принадлежности к классу 1
+        """
+        return [self._sigmoid(self.w * x + self.b) for x in X]
+    
