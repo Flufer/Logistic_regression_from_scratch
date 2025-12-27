@@ -1,3 +1,6 @@
+import math
+from typing import List
+
 class LogisticRegression:
     """
     Логистическая регрессия с нуля
@@ -8,3 +11,12 @@ class LogisticRegression:
         self.n_iterations = n_iterations
         self.w = 0.0
         self.b = 0.0
+
+    @staticmethod
+    def _sigmoid(z: float) -> float:
+        """
+        Sigmoid activation function
+
+        σ(z) = 1 / (1 + e^(-z))
+        """
+        return 1 / (1 + math.exp(-z))
