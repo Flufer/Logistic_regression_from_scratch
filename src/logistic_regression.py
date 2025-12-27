@@ -3,7 +3,7 @@ from typing import List
 
 class LogisticRegression:
     """
-    Логистическая регрессия с нуля
+    Логистическая регрессия с градиентным спуском
     """
 
     def __init__(self, learning_rate: float = 0.01, n_iterations: int = 1000):
@@ -37,6 +37,24 @@ class LogisticRegression:
             loss += y_true[i] * math.log(p) + (1 - y_true[i]) * math.log(1 - p)
 
         return -loss / n
+
+    def fit(self, X: List[float], y: List[int]):
+        """
+        Обучение модели с помощью градиентного спуска
+        """
+        n = len(X)
+
+        for _ in range(self.n_iterations):
+            linear_output = [self.w * x + self.b for x in X]
+            y_pred = [self._sigmoid(z) for z in linear_output]
+
+            dw = (1 / n) * sum((y_pred[i] - y[i]) * X[i] for i in range(n))
+            db = (1 / n) * sum(y_pred[i] - y[i] for i in range(n))
+
+            self.w -= self.learning_rate * dw
+            self.b -= self.learning_rate * db
+
+        return self
 
     def predict_proba(self, X: List[float]) -> List[float]:
         """
