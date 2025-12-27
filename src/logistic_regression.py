@@ -11,6 +11,7 @@ class LogisticRegression:
         self.n_iterations = n_iterations
         self.w = 0.0
         self.b = 0.0
+        self.loss_history = []
 
     @staticmethod
     def _sigmoid(z: float) -> float:
@@ -53,6 +54,9 @@ class LogisticRegression:
 
             self.w -= self.learning_rate * dw
             self.b -= self.learning_rate * db
+
+            loss = self._binary_cross_entropy(y, y_pred)
+            self.loss_history.append(loss)
 
         return self
 
