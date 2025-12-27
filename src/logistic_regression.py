@@ -65,3 +65,10 @@ class LogisticRegression:
         Возвращает вероятность принадлежности к классу 1
         """
         return [self._sigmoid(self.w * x + self.b) for x in X]
+
+    def predict(self, X: List[float], threshold: float = 0.5) -> List[int]:
+        """
+        Возвращает бинарные предсказания (0 или 1)
+        """
+        probabilities = self.predict_proba(X)
+        return [1 if p > threshold else 0 for p in probabilities]
